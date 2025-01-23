@@ -1,4 +1,4 @@
-package com.alok.behaviourDesignPattern.chainResponsibilityDesignPattern;
+package com.alok.problem2.behavioral.chainOfResponsibility;
 
 public class LogProcessor {
     public static int INFO = 1;

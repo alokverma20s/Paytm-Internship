@@ -1,4 +1,5 @@
-package com.alok.behaviourDesignPattern.chainResponsibilityDesignPattern;
+package com.alok.problem2.behavioral.chainOfResponsibility;
+
 
 public class DebugLogProcessor extends LogProcessor{
     public DebugLogProcessor(LogProcessor nextLogProcessor) {

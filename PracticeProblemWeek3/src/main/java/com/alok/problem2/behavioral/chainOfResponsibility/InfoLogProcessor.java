@@ -1,4 +1,5 @@
-package com.alok.behaviourDesignPattern.chainResponsibilityDesignPattern;
+package com.alok.problem2.behavioral.chainOfResponsibility;
+
 
 public class InfoLogProcessor extends LogProcessor{
     public InfoLogProcessor(LogProcessor nextLogProcessor) {
@@ -14,3 +15,4 @@ public class InfoLogProcessor extends LogProcessor{
         }
     }
 }
+

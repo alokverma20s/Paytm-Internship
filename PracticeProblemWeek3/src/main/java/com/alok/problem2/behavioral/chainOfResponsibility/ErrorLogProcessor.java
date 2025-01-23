@@ -1,4 +1,5 @@
-package com.alok.behaviourDesignPattern.chainResponsibilityDesignPattern;
+package com.alok.problem2.behavioral.chainOfResponsibility;
+
 
 public class ErrorLogProcessor extends LogProcessor{
     public ErrorLogProcessor(LogProcessor nextLogProcessor) {
@@ -14,3 +15,4 @@ public class ErrorLogProcessor extends LogProcessor{
         }
     }
 }
+
