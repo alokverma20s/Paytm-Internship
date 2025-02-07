@@ -1,5 +1,6 @@
 console.log("Contacts.js");
 const viewContactModal = document.getElementById("view_contact_modal");
+const baseUrl = "http://localhost:8080"
 
 // options with default values
 const options = {
@@ -39,7 +40,7 @@ async function loadContactdata(id) {
   console.log(id);
   try {
     const data = await (
-      await fetch(`http://localhost:8080/api/contacts/${id}`)
+      await fetch(`${baseUrl}/api/contacts/${id}`)
     ).json();
     console.log(data);
     document.querySelector("#contact_name").innerHTML = data.name;

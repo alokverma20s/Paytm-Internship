@@ -5,5 +5,5 @@ function changeId(currentId) {
   id = currentId;
 }
 function deleteContact() {
-  window.location.href = `http://localhost:8080/user/contacts/delete/${id}`;
+  window.location.href = `${baseUrl}/user/contacts/delete/${id}`;
 }
