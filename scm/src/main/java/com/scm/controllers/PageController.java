@@ -11,6 +11,7 @@ import com.scm.entities.User;
 import com.scm.forms.UserForm;
 import com.scm.helpers.Message;
 import com.scm.helpers.MessageType;
+import com.scm.helpers.RandomImageSelector;
 import com.scm.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -64,20 +65,17 @@ public class PageController {
         return new String("contact");
     }
 
+    // this is showing login page
     @GetMapping("/login")
     public String login() {
         return new String("login");
     }
 
-    
-
+    // registration page
     @GetMapping("/register")
     public String register(Model model) {
 
         UserForm userForm = new UserForm();
-        // default data bhi daal sakte hai
-        // userForm.setName("Durgesh");
-        // userForm.setAbout("This is about : Write something about yourself");
         model.addAttribute("userForm", userForm);
 
         return "register";
@@ -97,40 +95,15 @@ public class PageController {
         if (rBindingResult.hasErrors()) {
             return "register";
         }
-
-        // TODO::Validate userForm[Next Video]
-
-        // save to database
-
-        // userservice
-
-        // UserForm--> User
-        // User user = User.builder()
-        // .name(userForm.getName())
-        // .email(userForm.getEmail())
-        // .password(userForm.getPassword())
-        // .about(userForm.getAbout())
-        // .phoneNumber(userForm.getPhoneNumber())
-        // .profilePic(
-        // "https://www.learncodewithdurgesh.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdurgesh_sir.35c6cb78.webp&w=1920&q=75")
-        // .build();
-
         User user = new User();
         user.setName(userForm.getName());
         user.setEmail(userForm.getEmail());
         user.setPassword(userForm.getPassword());
         user.setAbout(userForm.getAbout());
         user.setPhoneNumber(userForm.getPhoneNumber());
-        user.setProfilePic(
-                "https://www.learncodewithdurgesh.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdurgesh_sir.35c6cb78.webp&w=1920&q=75");
+        user.setProfilePic(RandomImageSelector.getRandomImageUrl());
 
-        User savedUser = userService.saveUser(user);
-
-        System.out.println("user saved : " + savedUser);
-
-        // message = "Registration Successful"
-
-        // add the message:
+        userService.saveUser(user);
 
         Message message = Message.builder().content("Registration Successful").type(MessageType.green).build();
 
