@@ -1,0 +1,10 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: RatingService
+  data:
+    mongodb:
+      uri: mongodb+srv://alokverma73762:xjcYPy9iOWBsmxA4@rating.vajys.mongodb.net/ratingMicroServices?retryWrites=true&w=majority&appName=Rating
+  config:
+    import: "configserver:http://localhost:8085/"

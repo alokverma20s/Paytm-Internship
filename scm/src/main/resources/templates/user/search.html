@@ -150,11 +150,14 @@
                   </td>
                   <td class="px-6 py-4">
                     <div>
-                      <a href="">
+                      <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" th:onclick="changeId([[${c.id}]])">
                         <i class="fa-solid w-6 h-6 fa-trash"></i>
-                      </a>
-                      <a href=""> <i class="fa-solid w-6 h-6 fa-pen"></i></a>
-                      <a href=""> <i class="fa-solid fa-eye"></i></a>
+                      </button>
+                      <a th:href="@{'/user/contacts/view/'+*{id}}"> <i class="fa-solid w-6 h-6 fa-pen"></i></a>
+
+                      <button th:onclick="loadContactdata([[${c.id}]])">
+                        <i class="fa-solid fa-eye"></i>
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -209,11 +212,11 @@
             </h1>
           </div>
         </div>
+        <div data-th-replace="~{ user/contact_modals :: contact}"></div>
+        <div data-th-replace="~{ user/deleteModal :: delete}"></div>
       </div>
     </div>
 
-    <script>
-      console.log("this is profile page");
-    </script>
+    <script th:src="@{/js/contacts.js}"></script>
   </body>
 </html>
