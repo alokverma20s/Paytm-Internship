@@ -2,7 +2,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { validateToken } from "../services/operations/AuthAPI";
-import { loginSuccess, logout as logoutAction } from "../redux/slices/authSlice";
+import {
+  loginSuccess,
+  logout as logoutAction,
+} from "../redux/slices/authSlice";
 
 // Create Auth Context
 const AuthContext = createContext();
@@ -13,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
 
   const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("token") // Convert to boolean
+    !!localStorage.getItem("token"), // Convert to boolean
   );
 
   useEffect(() => {
@@ -46,7 +49,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, loginfuction, logoutfunction }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, loginfuction, logoutfunction }}
+    >
       {children}
     </AuthContext.Provider>
   );

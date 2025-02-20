@@ -26,7 +26,7 @@ export const getAllContact = async (
   page = 0,
   size = 10,
   sortBy = "name",
-  direction = "asc"
+  direction = "asc",
 ) => {
   try {
     const response = await apiConnector(
@@ -34,7 +34,7 @@ export const getAllContact = async (
       GET_ALL_CONTACTS,
       null,
       {},
-      { page: page, size: size, sortBy: sortBy, direction: direction }
+      { page: page, size: size, sortBy: sortBy, direction: direction },
     );
     return response.data;
   } catch (error) {
@@ -48,7 +48,7 @@ export const searchContact = async (
   page = 0,
   size = 10,
   sortBy = "name",
-  direction = "asc"
+  direction = "asc",
 ) => {
   try {
     console.log(SEARCH_CONTACT);
@@ -58,7 +58,7 @@ export const searchContact = async (
       SEARCH_CONTACT,
       { field, value },
       {},
-      { page: page, size: size, sortBy: sortBy, direction: direction }
+      { page: page, size: size, sortBy: sortBy, direction: direction },
     );
     return response.data;
   } catch (error) {
@@ -80,7 +80,11 @@ export const deleteContact = async (id) => {
 
 export const updateContact = async (contact) => {
   try {
-    const response = await apiConnector("put", `${UPDATE_CONTACT}/${contact.id}`, contact);
+    const response = await apiConnector(
+      "put",
+      `${UPDATE_CONTACT}/${contact.id}`,
+      contact,
+    );
     return response.data;
   } catch (error) {
     toast.error(error.message);
@@ -96,4 +100,4 @@ export const getContact = async (id) => {
     toast.error(error.message);
     console.error("Error fetching contacts:", error);
   }
-}
+};

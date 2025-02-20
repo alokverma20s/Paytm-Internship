@@ -48,7 +48,7 @@ export const login = async (email, password, navigate, dispatch) => {
       loading: "Logging in...",
       success: "Login successful!",
       error: (error) => error.message, // Display the specific error message
-    }
+    },
   );
 };
 
@@ -69,7 +69,7 @@ export const signup = async (body) => {
             throw new Error("User already exists");
           } else if (error.response.status >= 500) {
             console.log(response);
-            
+
             throw new Error(response);
           }
         } else if (error.request) {
@@ -84,7 +84,7 @@ export const signup = async (body) => {
       loading: "Signing up...",
       success: "Registration successful!",
       error: (error) => error.message, // Display the specific error message
-    }
+    },
   );
 };
 

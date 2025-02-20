@@ -22,39 +22,39 @@ const Navbar = ({ setDarkMode, darkMode }) => {
   const handleLogout = () => {
     logoutfunction();
     dispatch(logout());
-  }
+  };
 
   return (
-    <nav className="bg-white fixed top-0 w-full border-gray-900 shadow-sm dark:bg-gray-900 z-50">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav className="fixed top-0 z-50 w-full border-gray-900 bg-white shadow-sm dark:bg-gray-900">
+      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         {/* Brand */}
         <Link
           to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <img src={Logo} className="h-8 shadow rounded-full" alt="Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <img src={Logo} className="h-8 rounded-full shadow" alt="Logo" />
+          <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
             SCM
           </span>
         </Link>
 
         {/* Right-side Buttons */}
-        <div className="flex gap-4 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex gap-4 space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
           {/* Theme Toggle Button */}
           <button
             onClick={() => {
               setDarkMode(!darkMode);
               closeMenu();
             }}
-            className="bg-gray-200 px-3 py-2 rounded-lg dark:bg-gray-600"
+            className="rounded-lg bg-gray-200 px-3 py-2 dark:bg-gray-600"
           >
             {darkMode ? (
-              <div className="flex justify-center items-center gap-2 text-white">
+              <div className="flex items-center justify-center gap-2 text-white">
                 <MdLightMode />
                 <span>Light</span>
               </div>
             ) : (
-              <div className="flex justify-center items-center gap-2 text-gray-900">
+              <div className="flex items-center justify-center gap-2 text-gray-900">
                 <MdDarkMode />
                 <span>Dark</span>
               </div>
@@ -66,14 +66,14 @@ const Navbar = ({ setDarkMode, darkMode }) => {
               <Link
                 to="/user/profile"
                 onClick={closeMenu}
-                className="text-white hidden md:block bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="hidden rounded-lg bg-gray-800 px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:block"
               >
                 Profile
               </Link>
               <Link
                 to="/login"
                 onClick={handleLogout}
-                className="text-white hidden md:block bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="hidden rounded-lg bg-gray-800 px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:block"
               >
                 Logout
               </Link>
@@ -83,14 +83,14 @@ const Navbar = ({ setDarkMode, darkMode }) => {
               <Link
                 to="/login"
                 onClick={closeMenu}
-                className="text-white hidden md:block bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="hidden rounded-lg bg-gray-800 px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:block"
               >
                 Login
               </Link>
               <Link
                 to="/register"
                 onClick={closeMenu}
-                className="text-white hidden md:block bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="hidden rounded-lg bg-gray-800 px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:block"
               >
                 Signup
               </Link>
@@ -100,11 +100,11 @@ const Navbar = ({ setDarkMode, darkMode }) => {
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={toggleMenu}
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
           >
             <span className="sr-only">Open main menu</span>
             <svg
-              className="w-5 h-5"
+              className="h-5 w-5"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -125,14 +125,14 @@ const Navbar = ({ setDarkMode, darkMode }) => {
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
-          } items-center justify-between w-full md:flex md:w-auto md:order-1`}
+          } w-full items-center justify-between md:order-1 md:flex md:w-auto`}
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse">
             <li>
               <Link
                 to="/home"
                 onClick={closeMenu}
-                className="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
+                className="block rounded bg-blue-700 px-3 py-2 text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
               >
                 Home
               </Link>
@@ -141,7 +141,7 @@ const Navbar = ({ setDarkMode, darkMode }) => {
               <Link
                 to="/about"
                 onClick={closeMenu}
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
               >
                 About
               </Link>
@@ -150,7 +150,7 @@ const Navbar = ({ setDarkMode, darkMode }) => {
               <Link
                 to="/services"
                 onClick={closeMenu}
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
               >
                 Services
               </Link>
@@ -159,24 +159,24 @@ const Navbar = ({ setDarkMode, darkMode }) => {
               <Link
                 to="/contact"
                 onClick={closeMenu}
-                className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
               >
                 Contact
               </Link>
             </li>
             <li>
-              <div className="flex md:hidden justify-center items-center gap-4 space-x-3 md:space-x-0">
+              <div className="flex items-center justify-center gap-4 space-x-3 md:hidden md:space-x-0">
                 <Link
                   to="/login"
                   onClick={closeMenu}
-                  className="text-white w-1/2 bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="w-1/2 rounded-lg bg-gray-800 px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
                   onClick={closeMenu}
-                  className="text-white w-1/2 bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="w-1/2 rounded-lg bg-gray-800 px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Signup
                 </Link>

@@ -14,10 +14,10 @@ import { useAuth } from "./providers/AuthProvider";
 import { useSelector } from "react-redux";
 
 function App() {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
-  
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
+    localStorage.getItem("theme") === "dark",
   );
 
   // Toggle dark mode

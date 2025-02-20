@@ -101,9 +101,9 @@ const AddContact = () => {
     });
 
   return (
-    <div className="sm:ml-64 mb-10 pt-20 min-h-screen flex justify-center items-center">
+    <div className="mb-10 flex min-h-screen items-center justify-center pt-20 sm:ml-64">
       <div className="w-[90vw] md:w-[60vw] lg:w-[60%] xl:w-[50%]">
-        <div className="block p-6 border-t-[10px] border-green-700 bg-white rounded-xl shadow dark:bg-gray-800 dark:border-blue-700">
+        <div className="block rounded-xl border-t-[10px] border-green-700 bg-white p-6 shadow dark:border-blue-700 dark:bg-gray-800">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Add New Contact
           </h5>
@@ -119,7 +119,7 @@ const AddContact = () => {
           >
             {/* Name */}
             <div className="mb-3">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                 Contact Name:
               </label>
               <input
@@ -127,7 +127,7 @@ const AddContact = () => {
                 name="name"
                 value={contact.name}
                 onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Enter name"
                 required
               />
@@ -135,7 +135,7 @@ const AddContact = () => {
 
             {/* Email */}
             <div className="mb-3">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                 Contact Email:
               </label>
               <input
@@ -143,7 +143,7 @@ const AddContact = () => {
                 name="email"
                 value={contact.email}
                 onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="example@gmail.com"
                 required
               />
@@ -151,7 +151,7 @@ const AddContact = () => {
 
             {/* Phone Number */}
             <div className="mb-3">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                 Contact Phone:
               </label>
               <input
@@ -159,7 +159,7 @@ const AddContact = () => {
                 name="phoneNumber"
                 value={contact.phoneNumber}
                 onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Enter phone number"
                 required
               />
@@ -167,14 +167,14 @@ const AddContact = () => {
 
             {/* Address */}
             <div className="mb-3">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                 Contact Address:
               </label>
               <textarea
                 name="address"
                 value={contact.address}
                 onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none"
+                className="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Enter address"
                 rows="3"
                 required
@@ -183,14 +183,14 @@ const AddContact = () => {
 
             {/* Description */}
             <div className="mb-3">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                 Contact Description:
               </label>
               <textarea
                 name="description"
                 value={contact.description}
                 onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 resize-none"
+                className="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Write about the contact"
                 rows="3"
               />
@@ -199,7 +199,7 @@ const AddContact = () => {
             {/* Social Links */}
             <div className="mb-3 grid grid-cols-2 gap-3">
               <div className="">
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                   Website Link:
                 </label>
                 <input
@@ -207,12 +207,12 @@ const AddContact = () => {
                   name="websiteLink"
                   value={contact.websiteLink}
                   onChange={handleChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                   placeholder="Website URL"
                 />
               </div>
               <div className="">
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                   Linkedin Link:
                 </label>
                 <input
@@ -220,7 +220,7 @@ const AddContact = () => {
                   name="linkedInLink"
                   value={contact.linkedInLink}
                   onChange={handleChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                   placeholder="LinkedIn URL"
                 />
               </div>
@@ -234,7 +234,7 @@ const AddContact = () => {
                 name="favorite"
                 checked={contact.favorite}
                 onChange={handleChange}
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded"
+                className="h-4 w-4 rounded border-gray-300 text-blue-600"
               />
               <label
                 htmlFor="favoriteCheck"
@@ -248,14 +248,14 @@ const AddContact = () => {
             <div className="flex justify-center space-x-3">
               <button
                 type="submit"
-                className="px-3 py-2 rounded bg-gray-800 hover:bg-gray-700 text-white dark:bg-blue-700 dark:hover:bg-blue-800"
+                className="rounded bg-gray-800 px-3 py-2 text-white hover:bg-gray-700 dark:bg-blue-700 dark:hover:bg-blue-800"
               >
                 Add Contact
               </button>
               <button
                 type="reset"
                 onClick={handleReset}
-                className="px-3 py-2 rounded bg-red-500 hover:bg-red-400 text-white"
+                className="rounded bg-red-500 px-3 py-2 text-white hover:bg-red-400"
               >
                 Reset
               </button>

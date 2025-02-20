@@ -12,7 +12,7 @@ export const apiConnector = async (
   url,
   bodyData = null,
   customHeaders = {},
-  params = null
+  params = null,
 ) => {
   try {
     const token = localStorage.getItem("token");
@@ -33,12 +33,11 @@ export const apiConnector = async (
 
     return response;
   } catch (error) {
-    if(error.response?.data.message.includes("Duplicate entry")){
+    if (error.response?.data.message.includes("Duplicate entry")) {
       throw new Error("User already Exists"); // Re-throw error for handling in API calls
-    }
-    else{
+    } else {
       console.log("API Error:", error.response?.data.message);
-      throw new Error("Server Error")
+      throw new Error("Server Error");
     }
   }
 };

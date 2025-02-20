@@ -20,10 +20,10 @@ const ContactModal = ({ contact, onClose }) => {
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-white"
+        className="relative w-full max-w-2xl rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800 dark:text-white"
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between pb-4 border-b dark:border-gray-700">
+        <div className="flex items-center justify-between border-b pb-4 dark:border-gray-700">
           <div>
             <h3 className="text-xl font-semibold">
               {contact?.name || "Unknown"}
@@ -39,12 +39,12 @@ const ContactModal = ({ contact, onClose }) => {
         </div>
 
         {/* Modal Body */}
-        <div className="p-4 space-y-4">
+        <div className="space-y-4 p-4">
           <div className="flex items-center space-x-4">
             <img
               src={contact?.picture || defaultProfile}
               alt="Profile"
-              className="w-16 h-16 rounded-full"
+              className="h-16 w-16 rounded-full"
             />
             <div>
               <h2 className="text-lg font-semibold">{contact?.name}</h2>
@@ -68,7 +68,7 @@ const ContactModal = ({ contact, onClose }) => {
             {contact?.websiteLink ? (
               <a
                 href={contact.websiteLink}
-                className="text-blue-600 dark:text-blue-400 underline"
+                className="text-blue-600 underline dark:text-blue-400"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -83,7 +83,7 @@ const ContactModal = ({ contact, onClose }) => {
             {contact?.linkedInLink ? (
               <a
                 href={contact.linkedInLink}
-                className="text-blue-600 dark:text-blue-400 underline"
+                className="text-blue-600 underline dark:text-blue-400"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -100,15 +100,15 @@ const ContactModal = ({ contact, onClose }) => {
               type="checkbox"
               checked={contact?.favorite || false}
               disabled
-              className="ml-2 w-5 h-5 text-blue-600 border-gray-300 rounded"
+              className="ml-2 h-5 w-5 rounded border-gray-300 text-blue-600"
             />
           </div>
         </div>
 
         {/* Modal Footer */}
-        <div className="flex justify-end pt-4 border-t dark:border-gray-700">
+        <div className="flex justify-end border-t pt-4 dark:border-gray-700">
           <button
-            className="px-5 py-2 text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none"
+            className="rounded-lg bg-blue-700 px-5 py-2 text-white hover:bg-blue-800 focus:outline-none focus:ring-4"
             onClick={onClose}
           >
             Close
