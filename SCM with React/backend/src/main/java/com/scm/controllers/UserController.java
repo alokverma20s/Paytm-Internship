@@ -17,7 +17,6 @@ public class UserController {
 
     // ✅ Get details of the currently logged-in user
     @GetMapping("/profile")
-    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<User> getUserProfile(@AuthenticationPrincipal UserDetails userDetails) {
         // Fetch user from database using email
         User user = userService.getUserByEmail(userDetails.getUsername());

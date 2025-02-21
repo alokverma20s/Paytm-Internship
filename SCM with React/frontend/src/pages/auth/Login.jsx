@@ -1,17 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { login } from "../../services/operations/AuthAPI";
 import { useAuth } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const user = useSelector((state) => {
+      return state.auth.user;
+    });
+
+  if(user){
+    navigate("/user/profile")
+  }
+  
   const { loginfuction } = useAuth();
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -23,6 +32,10 @@ const Login = () => {
     }
     await login(email, password, navigate, dispatch);
     loginfuction();
+  };
+
+  const githubLogin = async () => {
+    window.location.href = `${baseUrl}/oauth2/authorization/github`
   };
 
   return (
@@ -83,6 +96,17 @@ const Login = () => {
               </button>
             </div>
           </form>
+
+          <button
+            onClick={githubLogin}
+            className="mt-6 flex w-full items-center justify-center"
+          >
+            <img
+              src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"
+              alt="GitHub Login"
+              className="h-12 rounded-full"
+            />
+          </button>
         </div>
       </div>
     </div>

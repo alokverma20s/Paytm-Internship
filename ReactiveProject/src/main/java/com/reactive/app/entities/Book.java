@@ -23,6 +23,12 @@ public class Book {
     this.publisher = publisher;
     this.author = author;
   }
+  public Book(String name, String description, String publisher, String author) {
+    this.name = name;
+    this.description = description;
+    this.publisher = publisher;
+    this.author = author;
+  }
 
   public Book() {
   }

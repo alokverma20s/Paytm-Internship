@@ -5,12 +5,14 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-
+import com.scm.entities.Providers;
 import com.scm.entities.User;
 import com.scm.helpers.AppConstants;
 import com.scm.helpers.ResourceNotFoundException;
@@ -23,8 +25,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Autowired
     private UserRepo userRepo;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(@Lazy PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -111,6 +116,34 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 user.getPassword(),
                 user.getAuthorities() // Uses roles from `getAuthorities()`
         );
+    }
+
+    public User processOAuthPostLogin(OAuth2User oAuth2User, String provider) {
+        String email = oAuth2User.getAttribute("email");
+
+        if (email == null) {
+            email = oAuth2User.getAttribute("login") + "@github.com"; // Fallback: Use GitHub username as email
+        }
+        // Check if the user already exists
+        Optional<User> existingUser = userRepo.findByEmail(email);
+
+        if (existingUser.isPresent()) {
+            return existingUser.get(); // Return existing user
+        }
+
+        // Create a new user
+        User newUser = User.builder()
+                .about(oAuth2User.getAttribute("bio"))
+                .name(oAuth2User.getAttribute("name"))
+                .email(email)
+                .profilePic(oAuth2User.getAttribute("avatar_url"))
+                .enabled(true)
+                .provider(Providers.valueOf(provider.toUpperCase()))
+                .providerUserId(oAuth2User.getAttribute("sub")) // OAuth provider ID
+                .roleList(List.of("ROLE_USER")) // Default role
+                .build();
+
+        return userRepo.save(newUser); // Save and return the new user
     }
 
 }

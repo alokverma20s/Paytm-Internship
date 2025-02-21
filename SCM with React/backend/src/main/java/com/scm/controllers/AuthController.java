@@ -33,7 +33,6 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<AuthResponse> login(@RequestBody Map<String, String> request) {
         System.out.println("Login request received: " + request);
 
@@ -55,7 +54,6 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<?> register(@RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setProfilePic(RandomImageSelector.getRandomImageUrl());

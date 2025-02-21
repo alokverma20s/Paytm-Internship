@@ -12,6 +12,7 @@ import ContactsPage from "./pages/Contacts/ContactsPage";
 import AddContact from "./pages/Contacts/AddContact";
 import { useAuth } from "./providers/AuthProvider";
 import { useSelector } from "react-redux";
+import OAuthSuccess from "./components/OAuthSuccess";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -36,9 +37,10 @@ function App() {
       <Navbar setDarkMode={setDarkMode} darkMode={darkMode} />
       {isAuthenticated && <Sidebar />}
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<ProfilePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
+        <Route path="/oauth-success" element={<OAuthSuccess />} />
 
         {/* Protected Routes */}
         <Route

@@ -22,17 +22,15 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
-
     @Autowired
     private UserService userService;
 
     // Add a new contact
     @PostMapping("/add")
-    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<?> addContact(@RequestBody ContactForm contactForm, Authentication authentication) {
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
-        
+
         String pictureUrl = RandomImageSelector.getRandomImageUrl();
 
         Contact contact = new Contact();
@@ -54,7 +52,6 @@ public class ContactController {
 
     // Get contacts with pagination
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Page<Contact>> getContacts(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
@@ -70,7 +67,6 @@ public class ContactController {
 
     // Search contacts
     @PostMapping("/search")
-    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Page<Contact>> searchContacts(
             @RequestBody ContactSearchForm searchForm,
             @RequestParam(value = "page", defaultValue = "0") int page,
@@ -79,7 +75,7 @@ public class ContactController {
             @RequestParam(value = "direction", defaultValue = "asc") String direction,
             Authentication authentication) {
 
-        System.out.println("Field is "+searchForm.getField() + "\nValue is"+searchForm.getValue());
+        System.out.println("Field is " + searchForm.getField() + "\nValue is" + searchForm.getValue());
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
         Page<Contact> results = contactService.searchByName(searchForm.getValue(), size, page, sortBy, direction, user);
@@ -88,7 +84,6 @@ public class ContactController {
 
     // Delete a contact
     @DeleteMapping("/{contactId}")
-    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<?> deleteContact(@PathVariable("contactId") String contactId, Authentication authentication) {
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
@@ -98,7 +93,6 @@ public class ContactController {
 
     // Get contact details
     @GetMapping("/{contactId}")
-    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Contact> getContact(@PathVariable("contactId") String contactId,
             Authentication authentication) {
         String username = Helper.getEmailOfLoggedInUser(authentication);
@@ -109,7 +103,6 @@ public class ContactController {
 
     // Update a contact
     @PutMapping("/{contactId}")
-    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<?> updateContact(@PathVariable("contactId") String contactId,
             @RequestBody ContactForm contactForm,
             Authentication authentication) {
