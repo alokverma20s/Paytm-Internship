@@ -17,6 +17,7 @@ import org.springframework.data.domain.*;
 
 import com.scm.entities.Contact;
 import com.scm.entities.User;
+import com.scm.helpers.ResourceNotFoundException;
 import com.scm.repsitories.ContactRepo;
 import com.scm.services.impl.ContactServiceImpl;
 
@@ -53,6 +54,7 @@ class ContactServiceTests {
                 .address("123 Main St")
                 .phoneNumber("1234567890")
                 .description("Alice's description")
+                .user(user)
                 .favorite(true)
                 .build();
     }
@@ -111,12 +113,28 @@ class ContactServiceTests {
     }
 
     @Test
-    void testDeleteContact() {
-        doNothing().when(contactRepository).deleteById("1");
+    void delete_ShouldDeleteContact_WhenContactExists() {
+        // Arrange
+        when(contactRepository.findByIdAndUser("1", user)).thenReturn(contact);
 
+        // Act
         contactService.delete("1", user);
 
-        verify(contactRepository, times(1)).deleteById("1");
+        // Assert
+        verify(contactRepository, times(1)).delete(contact);
+    }
+
+    @Test
+    void delete_ShouldThrowException_WhenContactDoesNotExist() {
+        // Arrange
+        when(contactRepository.findByIdAndUser("999", user)).thenReturn(null);
+
+        // Act & Assert
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () ->
+                contactService.delete("999", user));
+
+        assertEquals("Contact not found with given id 999", exception.getMessage());
+        verify(contactRepository, never()).delete(any());
     }
 
     @Test

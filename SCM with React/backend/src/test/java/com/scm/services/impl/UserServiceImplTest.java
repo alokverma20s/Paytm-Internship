@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +22,7 @@ import com.scm.entities.User;
 import com.scm.helpers.ResourceNotFoundException;
 import com.scm.repsitories.UserRepo;
 
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
 
@@ -46,7 +48,7 @@ class UserServiceImplTest {
 
   @Test
   void testSaveUser() {
-    when(passwordEncoder.encode("password123")).thenReturn("encodedPassword");
+    // when(passwordEncoder.encode("password123")).thenReturn("encodedPassword");
     when(userRepo.save(any(User.class))).thenReturn(user);
 
     User savedUser = userService.saveUser(user);
