@@ -8,6 +8,10 @@ import com.scm.helpers.Helper;
 import com.scm.helpers.RandomImageSelector;
 import com.scm.services.ContactService;
 import com.scm.services.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -50,6 +54,36 @@ public class ContactController {
         return new ResponseEntity<String>("Contact added successfully", HttpStatus.CREATED);
     }
 
+    
+    // Add multiple contacts
+    @PostMapping("/addMultiple")
+    public ResponseEntity<?> addMultipleContacts(@RequestBody List<ContactForm> contactForms, Authentication authentication) {
+        String username = Helper.getEmailOfLoggedInUser(authentication);
+        User user = userService.getUserByEmail(username);
+
+        List<Contact> contacts = new ArrayList<>();
+        for (ContactForm contactForm : contactForms) {
+            String pictureUrl = RandomImageSelector.getRandomImageUrl();
+
+            Contact contact = new Contact();
+            contact.setName(contactForm.getName());
+            contact.setFavorite(contactForm.isFavorite());
+            contact.setEmail(contactForm.getEmail());
+            contact.setPhoneNumber(contactForm.getPhoneNumber());
+            contact.setAddress(contactForm.getAddress());
+            contact.setDescription(contactForm.getDescription());
+            contact.setUser(user);
+            contact.setLinkedInLink(contactForm.getLinkedInLink());
+            contact.setWebsiteLink(contactForm.getWebsiteLink());
+            contact.setPicture(pictureUrl);
+
+            contacts.add(contact);
+        }
+
+        contactService.saveAll(contacts);
+
+        return new ResponseEntity<String>("Contacts added successfully", HttpStatus.CREATED);
+    }
     // Get contacts with pagination
     @GetMapping
     public ResponseEntity<Page<Contact>> getContacts(

@@ -31,7 +31,14 @@ public class ContactServiceImpl implements ContactService {
         return contactRepo.save(contact);
 
     }
-
+    @Override
+    public List<Contact> saveAll(List<Contact> contacts) {
+        for (Contact contact : contacts) {
+            String contactId = UUID.randomUUID().toString();
+            contact.setId(contactId);
+        }
+        return contactRepo.saveAll(contacts);
+    }
     @Override
     public Contact update(Contact contact) {
         return contactRepo.save(contact);

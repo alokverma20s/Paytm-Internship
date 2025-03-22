@@ -9,7 +9,8 @@ import com.scm.entities.User;
 public interface ContactService {
     // save contacts
     Contact save(Contact contact);
-
+    // save all contacts
+    List<Contact> saveAll(List<Contact> contacts);
     // update contact
     Contact update(Contact contact);
 
