@@ -10,11 +10,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.scm.DTO.ContactDTO;
 import com.scm.entities.Contact;
 import com.scm.entities.User;
 import com.scm.helpers.ResourceNotFoundException;
 import com.scm.repsitories.ContactRepo;
 import com.scm.services.ContactService;
+import com.scm.services.KafkaService;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -22,6 +24,8 @@ public class ContactServiceImpl implements ContactService {
 
     @Autowired
     private ContactRepo contactRepo;
+    @Autowired
+    private KafkaService kafkaService;
 
     @Override
     public Contact save(Contact contact) {
@@ -32,12 +36,16 @@ public class ContactServiceImpl implements ContactService {
 
     }
     @Override
-    public List<Contact> saveAll(List<Contact> contacts) {
+    // public List<Contact> saveAll(List<Contact> contacts) {
+    public void saveAll(List<Contact> contacts) {
         for (Contact contact : contacts) {
             String contactId = UUID.randomUUID().toString();
             contact.setId(contactId);
+            ContactDTO contactDTO = ContactDTO.fromEntity(contact);
+            kafkaService.saveContact(contactDTO);
         }
-        return contactRepo.saveAll(contacts);
+
+        // return contactRepo.saveAll(contacts);
     }
     @Override
     public Contact update(Contact contact) {
