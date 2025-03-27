@@ -6,6 +6,8 @@ import com.scm.helpers.RandomImageSelector;
 import com.scm.repsitories.UserRepo;
 import com.scm.utils.JwtUtil;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +25,7 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final UserRepo userRepository;
     private final PasswordEncoder passwordEncoder;
+    private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil,
             UserRepo userRepository, PasswordEncoder passwordEncoder) {
@@ -34,7 +37,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody Map<String, String> request) {
-        System.out.println("Login request received: " + request);
+        logger.info("Login request received: {}", request);
 
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -46,7 +49,7 @@ public class AuthController {
             AuthResponse authResponse = new AuthResponse(token, user);
             return ResponseEntity.ok(authResponse);
         } catch (Exception e) {
-            System.err.println("Authentication failed: " + e.getMessage());
+            logger.error("Authentication failed: {}" , e.getMessage());
             AuthResponse authResponse = new AuthResponse(null, null);
             authResponse.setError("Invalid credentials");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authResponse);
@@ -55,6 +58,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
+        logger.info("Register request received: {}", user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setProfilePic(RandomImageSelector.getRandomImageUrl());
         userRepository.save(user);

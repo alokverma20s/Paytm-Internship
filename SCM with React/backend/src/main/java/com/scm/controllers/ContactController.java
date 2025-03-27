@@ -12,6 +12,8 @@ import com.scm.services.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,7 @@ public class ContactController {
 
     @Autowired
     private ContactService contactService;
+    private Logger logger = LoggerFactory.getLogger(ContactController.class);
 
     @Autowired
     private UserService userService;
@@ -34,6 +37,9 @@ public class ContactController {
     public ResponseEntity<?> addContact(@RequestBody ContactForm contactForm, Authentication authentication) {
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
+
+
+        logger.info("A contact added by: {}", user.getEmail());
 
         String pictureUrl = RandomImageSelector.getRandomImageUrl();
 
@@ -58,8 +64,10 @@ public class ContactController {
     // Add multiple contacts
     @PostMapping("/addMultiple")
     public ResponseEntity<?> addMultipleContacts(@RequestBody List<ContactForm> contactForms, Authentication authentication) {
+
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
+        logger.info("Multiple contacts received by: {}", user.getEmail());
 
         List<Contact> contacts = new ArrayList<>();
         for (ContactForm contactForm : contactForms) {
@@ -95,6 +103,7 @@ public class ContactController {
 
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
+        logger.info("Contacts requested by: {}", user.getEmail());
         Page<Contact> contacts = contactService.getByUser(user, page, size, sortBy, direction);
         return ResponseEntity.ok(contacts);
     }
@@ -112,6 +121,8 @@ public class ContactController {
         System.out.println("Field is " + searchForm.getField() + "\nValue is" + searchForm.getValue());
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
+
+        logger.info("Contacts searched by: {} with arguments {}, {}", user.getEmail(), searchForm.getField(), searchForm.getValue());        
         Page<Contact> results = contactService.searchByName(searchForm.getValue(), size, page, sortBy, direction, user);
         return ResponseEntity.ok(results);
     }
